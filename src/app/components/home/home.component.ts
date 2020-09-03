@@ -19,7 +19,9 @@ export class HomeComponent implements OnInit {
   }
 
   public play() {
-    this.router.navigateByUrl(RoutePath.SOLAR_SYSTEM);
-
+    this.initialised = false;
+    setTimeout(() => {
+      this.router.navigateByUrl(RoutePath.SOLAR_SYSTEM);
+    }, 500);
   }
 }

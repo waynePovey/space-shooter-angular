@@ -1,0 +1,80 @@
+div {
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.1em solid transparent;
+    border-top-color: white;
+    border-radius: 50%;
+    padding: 0.1em;
+    width: 13em;
+    height: 13em;
+
+    -webkit-animation: spin 10s linear infinite;
+    animation: spin 10s linear infinite;
+
+    .mars {
+        width: 11em;
+        height: 11em;
+
+        .earth {
+            width: 9em;
+            height: 9em;
+
+            .venus {
+                width: 7em;
+                height: 7em;
+
+                .mercury {
+                    width: 5em;
+                    height: 5em;
+
+                    .sun {
+                        border: none;
+                        background: white;
+                        width: 2em;
+                        height: 2em;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.planet {
+    position: absolute;
+    top: 10%;
+    right: 10%;
+    background: white;
+    width: 0.5em;
+    height: 0.5em;
+    border-radius: 50%;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(0deg);  /* IE 9 */
+        transform: rotate(0deg);  /* Firefox 16+, IE 10+, Opera */
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(360deg);  /* IE 9 */
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(0deg);  /* IE 9 */
+        transform: rotate(0deg);  /* Firefox 16+, IE 10+, Opera */
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);  /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(360deg);  /* IE 9 */
+        transform: rotate(360deg);
+    }
+}

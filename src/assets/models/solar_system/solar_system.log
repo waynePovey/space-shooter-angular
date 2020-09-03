@@ -1,0 +1,111 @@
+Exporter version: 6.4.3, Blender version: 2.81 (sub 16)
+========= Conversion from Blender to Babylon.js =========
+	Scene settings used :
+		Inline textures     :  false
+		Material Type       :  PBR
+		Positions Precision :  4
+		Normals Precision   :  3
+		UVs Precision       :  3
+		Vert Color Precision:  3
+		Mat Weight Precision:  2
+		Keep Z-up r-handed  :  no
+		Texture directory   :  C:\github_projects\waynepovey-portfolio\src\assets\models\solar_system\
+	Python World class constructor completed
+	WARNING: No active camera has been assigned, or is not in a currently selected Blender layer
+	processing begun of mesh:  earth
+		processing begun of material:  white
+		processing begun of material:  dirt
+		processing begun of material:  grass
+		processing begun of material:  water
+		processing begun of material:  evergreen_leaves
+		processing begun of material:  leaves
+		processing begun of material:  dry_leaves
+		processing begun of multimaterial:  solar_system.Multimaterial#0
+		num positions      :  112092
+		num normals        :  112092
+		num tangents       :  0
+		num uvs            :  224184
+		num uvs2           :  0
+		num colors         :  448368
+		num triangles      :  37832
+		WARNING: # of 0 area faces found:  8
+	processing begun of mesh:  plane
+		processing begun of material:  white
+		processing begun of material:  blue
+		processing begun of material:  black
+		processing begun of material:  red
+		registered as also a user of material:  white
+		processing begun of multimaterial:  solar_system.Multimaterial#1
+		num positions      :  2467
+		num normals        :  2467
+		num tangents       :  0
+		num uvs            :  4934
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  3341
+		WARNING: # of 0 area faces found:  122
+	processing begun of mesh:  clouds
+		processing begun of material:  white
+		registered as also a user of material:  white
+		num positions      :  720
+		num normals        :  720
+		num tangents       :  0
+		num uvs            :  1440
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  240
+	processing begun of mesh:  volcano_world
+		processing begun of material:  lava
+		processing begun of material:  purple
+		processing begun of material:  sulpher
+		processing begun of multimaterial:  solar_system.Multimaterial#2
+		num positions      :  22062
+		num normals        :  22062
+		num tangents       :  0
+		num uvs            :  44124
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  7354
+	processing begun of mesh:  Icosphere
+		WARNING: No materials have been assigned: 
+		num positions      :  3714
+		num normals        :  3714
+		num tangents       :  0
+		num uvs            :  7428
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  1238
+	processing begun of mesh:  Torus.001
+		WARNING: No materials have been assigned: 
+		num positions      :  2909
+		num normals        :  2909
+		num tangents       :  0
+		num uvs            :  5818
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  1152
+	processing begun of mesh:  player
+		processing begun of material:  player_green
+		processing begun of material:  white
+		processing begun of material:  player_engine
+		processing begun of material:  player_dome
+		registered as also a user of material:  white
+		processing begun of multimaterial:  solar_system.Multimaterial#3
+		num positions      :  1876
+		num normals        :  1876
+		num tangents       :  0
+		num uvs            :  3752
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  1301
+========= Writing of JSON file started =========
+	writing mesh:  earth
+	writing mesh:  plane
+	writing mesh:  clouds
+	writing mesh:  volcano_world
+	writing mesh:  Icosphere
+	writing mesh:  Torus.001
+	writing mesh:  player
+========= Writing of JSON file completed =========
+========= end of processing =========
+elapsed time:  0 min, 9.9869 secs
