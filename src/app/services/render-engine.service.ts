@@ -2,11 +2,7 @@ import { Injectable, NgZone } from '@angular/core';
 import {
   Engine,
   Scene,
-  Vector3,
 } from '@babylonjs/core';
-import Utils from 'src/app/common/utils';
-
-const eRotPer = -120;
 
 @Injectable({
   providedIn: 'root'
@@ -31,19 +27,20 @@ export class RenderEngineService {
 
       this.engine.runRenderLoop(() => {
         scene.render();
-
-        // BODY ROTATIONS
-        scene.getMeshByID('earth')
-        ?.rotate(new Vector3(0, 1, 0), Utils.orbitalPeriodSecs(eRotPer, this.engine.getFps()));
-        scene.getMeshByID('volcano_world')
-          ?.rotate(new Vector3(0, 1, 0), Utils.orbitalPeriodSecs(eRotPer, this.engine.getFps()));
-
-        // EARTH SATS
-        scene.getTransformNodeByID('coPlane')
-          ?.rotate(new Vector3(0, 1, 0), Utils.orbitalPeriodSecs(30, this.engine.getFps()));
-        scene.getTransformNodeByID('coMoon')
-          ?.rotate(new Vector3(0, 1, 0), Utils.orbitalPeriodSecs(30, this.engine.getFps()));
       });
+    });
+  }
+
+  public addInspector(scene: Scene) {
+    // INSPECTOR
+    window.addEventListener('keydown', (ev) => {
+      if (ev.ctrlKey && ev.key === 'i') {
+        if (scene.debugLayer.isVisible()) {
+          scene.debugLayer.hide();
+        } else {
+          scene.debugLayer.show();
+        }
+      }
     });
   }
 }

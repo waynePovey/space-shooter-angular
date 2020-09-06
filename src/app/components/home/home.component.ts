@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { RoutePath } from 'src/app/common/routes';
+import { RoutePath } from '@common/routes';
 
 @Component({
   selector: 'app-home',

@@ -1,6 +1,6 @@
 import { Vector3 } from '@babylonjs/core';
 
-export default class Utils{
+export default class Utils {
     constructor() {}
 
     public static degreesToRads(degrees: number): number {

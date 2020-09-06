@@ -66,7 +66,7 @@ Exporter version: 6.4.3, Blender version: 2.81 (sub 16)
 		num uvs2           :  0
 		num colors         :  0
 		num triangles      :  7354
-	processing begun of mesh:  Icosphere
+	processing begun of mesh:  ringed_planet
 		WARNING: No materials have been assigned: 
 		num positions      :  3714
 		num normals        :  3714
@@ -75,7 +75,7 @@ Exporter version: 6.4.3, Blender version: 2.81 (sub 16)
 		num uvs2           :  0
 		num colors         :  0
 		num triangles      :  1238
-	processing begun of mesh:  Torus.001
+	processing begun of mesh:  rings
 		WARNING: No materials have been assigned: 
 		num positions      :  2909
 		num normals        :  2909
@@ -89,23 +89,74 @@ Exporter version: 6.4.3, Blender version: 2.81 (sub 16)
 		processing begun of material:  white
 		processing begun of material:  player_engine
 		processing begun of material:  player_dome
+		processing begun of material:  anti_matter
 		registered as also a user of material:  white
 		processing begun of multimaterial:  solar_system.Multimaterial#3
-		num positions      :  1876
-		num normals        :  1876
+		num positions      :  4301
+		num normals        :  4301
 		num tangents       :  0
-		num uvs            :  3752
+		num uvs            :  8602
 		num uvs2           :  0
 		num colors         :  0
-		num triangles      :  1301
+		num triangles      :  2996
+	processing begun of mesh:  left_engine
+		processing begun of material:  black
+		processing begun of material:  anti_matter
+		registered as also a user of material:  black
+		registered as also a user of material:  anti_matter
+		processing begun of multimaterial:  solar_system.Multimaterial#4
+		num positions      :  3152
+		num normals        :  3152
+		num tangents       :  0
+		num uvs            :  6304
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  1280
+	processing begun of mesh:  right_engine
+		processing begun of material:  black
+		processing begun of material:  anti_matter
+		registered as also a user of material:  black
+		registered as also a user of material:  anti_matter
+		processing begun of multimaterial:  solar_system.Multimaterial#5
+		num positions      :  3152
+		num normals        :  3152
+		num tangents       :  0
+		num uvs            :  6304
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  1280
+	processing begun of mesh:  left_gun
+		processing begun of material:  white
+		registered as also a user of material:  white
+		num positions      :  2727
+		num normals        :  2727
+		num tangents       :  0
+		num uvs            :  5454
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  1056
+	processing begun of mesh:  right_gun
+		processing begun of material:  white
+		registered as also a user of material:  white
+		num positions      :  2727
+		num normals        :  2727
+		num tangents       :  0
+		num uvs            :  5454
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  1056
 ========= Writing of JSON file started =========
 	writing mesh:  earth
 	writing mesh:  plane
 	writing mesh:  clouds
 	writing mesh:  volcano_world
-	writing mesh:  Icosphere
-	writing mesh:  Torus.001
+	writing mesh:  ringed_planet
+	writing mesh:  rings
 	writing mesh:  player
+	writing mesh:  left_engine
+	writing mesh:  right_engine
+	writing mesh:  left_gun
+	writing mesh:  right_gun
 ========= Writing of JSON file completed =========
 ========= end of processing =========
-elapsed time:  0 min, 9.9869 secs
+elapsed time:  0 min, 10.0476 secs

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Scene, AbstractMesh, SceneLoader, MeshBuilder, StandardMaterial, CubeTexture, Texture, Mesh, TransformNode, Vector3 } from '@babylonjs/core';
-import Utils from '../common/utils';
+import { Scene, AbstractMesh, SceneLoader, MeshBuilder, StandardMaterial, CubeTexture, Texture, TransformNode, Vector3 } from '@babylonjs/core';
+import Utils from '@common/utils';
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +11,14 @@ export class ModelService {
 
   public loadModel(scene: Scene, url: string, model: string): Promise<AbstractMesh[]> {
     return new Promise<AbstractMesh[]>(resolve => {
-      SceneLoader. ImportMesh('', url, model, scene, (meshes) => {
+      SceneLoader.ImportMesh('', url, model, scene, (meshes) => {
         resolve(meshes);
       });
     });
   }
 
   public createSkybox(scene: Scene, url: string): void {
-      const sbMesh = MeshBuilder.CreateBox('skyBox', { size: 1000000 }, scene);
+      const sbMesh = MeshBuilder.CreateBox('skyBox', { size: 1000 }, scene);
       const sbMat = new StandardMaterial('skyBox', scene);
       sbMat.backFaceCulling = false;
       sbMesh.material = sbMat;
@@ -36,5 +36,15 @@ export class ModelService {
     m.setParent(co);
 
     return co;
+  }
+
+  public rotateMesh(scene: Scene, mesh: string, axis: Vector3, rotPeriod: number, fps: number) {
+    scene.getMeshByID(mesh)
+    ?.rotate(axis, Utils.orbitalPeriodSecs(rotPeriod, fps));
+  }
+
+  public rotateTransformNode(scene: Scene, node: string, axis: Vector3, rotPeriod: number, fps: number) {
+    scene.getTransformNodeByID(node)
+    ?.rotate(axis, Utils.orbitalPeriodSecs(rotPeriod, fps));
   }
 }

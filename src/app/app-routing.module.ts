@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { RoutePath } from './common/routes';
-import { SolarSystemComponent } from './components/solar-system/solar-system.component';
+import { SolarSystemComponent } from '@scenes/solar-system/solar-system.component';
 
 
 const routes: Routes = [
