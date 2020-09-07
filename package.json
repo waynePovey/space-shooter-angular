@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve -o --port=4202",
-    "build": "ng build",
+    "start": "node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng serve -o --port=4202",
+    "build": "node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng build --base-href /dist/waynepovey-portfolio/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

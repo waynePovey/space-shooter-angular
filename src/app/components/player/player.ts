@@ -75,7 +75,7 @@ export class Player extends TransformNode {
         }
     }
 
-    public rollLeft () {
+    public rollLeft (rollRate: number) {
 
     }
 
