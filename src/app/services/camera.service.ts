@@ -12,7 +12,7 @@ export class CameraService {
 
   constructor() { }
 
-  public createChaseCam(scene: Scene, player: Player, distance: number, fov: number): UniversalCamera {
+  public createChaseCam(scene: Scene, player: Player, height: number, distance: number, fov: number): UniversalCamera {
     const camRoot = new TransformNode('camRoot', scene);
     camRoot.position = new Vector3(0, 0, 0);
     camRoot.rotation = new Vector3(0, 0, 0);
@@ -21,8 +21,8 @@ export class CameraService {
     yTilt.rotation = player.PITCH_TILT;
     yTilt.parent = camRoot;
 
-    const camera = new UniversalCamera('chaseCam', new Vector3(0, 0, distance), scene);
-    camera.lockedTarget = camRoot.position;
+    const camera = new UniversalCamera('chaseCam', new Vector3(0, height, distance), scene);
+    camera.lockedTarget = new Vector3(camRoot.position.x, camRoot.position.y + height, camRoot.position.z);
     camera.fov = Utils.degreesToRads(fov);
     camera.parent = yTilt;
     camera.minZ = 0.05;
@@ -42,7 +42,7 @@ export class CameraService {
 
     camRoot.rotation = Vector3.Lerp(
       camRoot.rotation,
-      new Vector3(player.rotation.x, player.rotation.y, player.rotation.z),
+      new Vector3(player.rotation.x, player.rotation.y, 0),
       rotLag
     );
   }

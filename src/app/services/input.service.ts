@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Scene, ActionManager, ExecuteCodeAction, Axis, Space, Vector3, Scalar } from '@babylonjs/core';
-import { Player } from '@components/player/player';
-import Utils from '@common/utils';
+import { Scene, ActionManager, ExecuteCodeAction, VirtualJoystick } from '@babylonjs/core';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +7,8 @@ import Utils from '@common/utils';
 export class InputService {
 
   private inputMap = {};
+  public lJoystick: VirtualJoystick;
+  public rJoystick: VirtualJoystick;
 
   constructor() {}
 
@@ -26,9 +26,21 @@ export class InputService {
         this.inputMap[evt.sourceEvent.key] = evt.sourceEvent.type === 'keydown';
       })
     );
+
+    // this.lJoystick = new VirtualJoystick(true);
+    // this.rJoystick = new VirtualJoystick(false);
+    // VirtualJoystick.Canvas.style.zIndex = '-1';
   }
 
   public keyPressed(key: string): boolean {
     return this.inputMap[key];
+  }
+
+  public lJoystickPressed() {
+    return this.lJoystick.pressed;
+  }
+
+  public rJoystickPressed() {
+    return this.lJoystick.pressed;
   }
 }

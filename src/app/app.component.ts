@@ -15,6 +15,6 @@ export class AppComponent {
   }
 
   public initialiseApp() {
-    this.router.navigateByUrl(RoutePath.HOME);
+    this.router.navigateByUrl(RoutePath.SOLAR_SYSTEM);
   }
 }

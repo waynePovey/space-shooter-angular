@@ -9,7 +9,7 @@ Exporter version: 6.4.3, Blender version: 2.81 (sub 16)
 		Vert Color Precision:  3
 		Mat Weight Precision:  2
 		Keep Z-up r-handed  :  no
-		Texture directory   :  C:\github_projects\waynepovey-portfolio\src\assets\models\solar_system\
+		Texture directory   :  C:\github_projects\webgl\waynepovey-portfolio\src\assets\models\solar_system\
 	Python World class constructor completed
 	WARNING: No active camera has been assigned, or is not in a currently selected Blender layer
 	processing begun of mesh:  earth
@@ -21,44 +21,18 @@ Exporter version: 6.4.3, Blender version: 2.81 (sub 16)
 		processing begun of material:  leaves
 		processing begun of material:  dry_leaves
 		processing begun of multimaterial:  solar_system.Multimaterial#0
-		num positions      :  112092
-		num normals        :  112092
+		num positions      :  133264
+		num normals        :  133264
 		num tangents       :  0
-		num uvs            :  224184
+		num uvs            :  266528
 		num uvs2           :  0
-		num colors         :  448368
-		num triangles      :  37832
-		WARNING: # of 0 area faces found:  8
-	processing begun of mesh:  plane
-		processing begun of material:  white
-		processing begun of material:  blue
-		processing begun of material:  black
-		processing begun of material:  red
-		registered as also a user of material:  white
-		processing begun of multimaterial:  solar_system.Multimaterial#1
-		num positions      :  2467
-		num normals        :  2467
-		num tangents       :  0
-		num uvs            :  4934
-		num uvs2           :  0
-		num colors         :  0
-		num triangles      :  3341
-		WARNING: # of 0 area faces found:  122
-	processing begun of mesh:  clouds
-		processing begun of material:  white
-		registered as also a user of material:  white
-		num positions      :  720
-		num normals        :  720
-		num tangents       :  0
-		num uvs            :  1440
-		num uvs2           :  0
-		num colors         :  0
-		num triangles      :  240
-	processing begun of mesh:  volcano_world
+		num colors         :  533056
+		num triangles      :  44882
+	processing begun of mesh:  volcanoWorld
 		processing begun of material:  lava
 		processing begun of material:  purple
 		processing begun of material:  sulpher
-		processing begun of multimaterial:  solar_system.Multimaterial#2
+		processing begun of multimaterial:  solar_system.Multimaterial#1
 		num positions      :  22062
 		num normals        :  22062
 		num tangents       :  0
@@ -66,8 +40,10 @@ Exporter version: 6.4.3, Blender version: 2.81 (sub 16)
 		num uvs2           :  0
 		num colors         :  0
 		num triangles      :  7354
-	processing begun of mesh:  ringed_planet
-		WARNING: No materials have been assigned: 
+	processing begun of mesh:  darkWorld
+		processing begun of material:  black
+		processing begun of material:  core
+		processing begun of multimaterial:  solar_system.Multimaterial#2
 		num positions      :  3714
 		num normals        :  3714
 		num tangents       :  0
@@ -75,88 +51,225 @@ Exporter version: 6.4.3, Blender version: 2.81 (sub 16)
 		num uvs2           :  0
 		num colors         :  0
 		num triangles      :  1238
-	processing begun of mesh:  rings
-		WARNING: No materials have been assigned: 
-		num positions      :  2909
-		num normals        :  2909
-		num tangents       :  0
-		num uvs            :  5818
-		num uvs2           :  0
-		num colors         :  0
-		num triangles      :  1152
 	processing begun of mesh:  player
-		processing begun of material:  player_green
+		processing begun of material:  player_body
 		processing begun of material:  white
-		processing begun of material:  player_engine
 		processing begun of material:  player_dome
-		processing begun of material:  anti_matter
+		processing begun of material:  player_engine
 		registered as also a user of material:  white
 		processing begun of multimaterial:  solar_system.Multimaterial#3
-		num positions      :  4301
-		num normals        :  4301
+		num positions      :  2192
+		num normals        :  2192
 		num tangents       :  0
-		num uvs            :  8602
+		num uvs            :  4384
 		num uvs2           :  0
 		num colors         :  0
-		num triangles      :  2996
-	processing begun of mesh:  left_engine
-		processing begun of material:  black
-		processing begun of material:  anti_matter
-		registered as also a user of material:  black
-		registered as also a user of material:  anti_matter
+		num triangles      :  1243
+	processing begun of mesh:  leftGun
+		processing begun of material:  player_dome
+		registered as also a user of material:  player_dome
+		num positions      :  2727
+		num normals        :  2727
+		num tangents       :  0
+		num uvs            :  5454
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  1056
+	processing begun of mesh:  rightGun
+		processing begun of material:  player_dome
+		registered as also a user of material:  player_dome
+		num positions      :  2727
+		num normals        :  2727
+		num tangents       :  0
+		num uvs            :  5454
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  1056
+	processing begun of mesh:  a
+		processing begun of material:  white
+		registered as also a user of material:  white
+		num positions      :  199
+		num normals        :  199
+		num tangents       :  0
+		num uvs            :  398
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  134
+		WARNING: # of 0 area faces found:  2
+	processing begun of mesh:  w
+		processing begun of material:  white
+		registered as also a user of material:  white
+		num positions      :  492
+		num normals        :  492
+		num tangents       :  0
+		num uvs            :  984
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  426
+		WARNING: # of 0 area faces found:  2
+	processing begun of mesh:  d
+		processing begun of material:  white
+		registered as also a user of material:  white
+		num positions      :  515
+		num normals        :  515
+		num tangents       :  0
+		num uvs            :  1030
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  450
+		WARNING: # of 0 area faces found:  2
+	processing begun of mesh:  polutionWorld
+		processing begun of material:  dirt
+		processing begun of material:  dirty_water
+		processing begun of material:  grass
+		registered as also a user of material:  dirt
+		registered as also a user of material:  grass
 		processing begun of multimaterial:  solar_system.Multimaterial#4
-		num positions      :  3152
-		num normals        :  3152
+		num positions      :  19611
+		num normals        :  19611
 		num tangents       :  0
-		num uvs            :  6304
+		num uvs            :  39222
+		num uvs2           :  0
+		num colors         :  78444
+		num triangles      :  6564
+		WARNING: # of 0 area faces found:  8
+	processing begun of mesh:  greyClouds
+		processing begun of material:  sulpher
+		registered as also a user of material:  sulpher
+		num positions      :  720
+		num normals        :  720
+		num tangents       :  0
+		num uvs            :  1440
 		num uvs2           :  0
 		num colors         :  0
-		num triangles      :  1280
-	processing begun of mesh:  right_engine
-		processing begun of material:  black
-		processing begun of material:  anti_matter
-		registered as also a user of material:  black
-		registered as also a user of material:  anti_matter
+		num triangles      :  240
+	processing begun of mesh:  sun
+		processing begun of material:  Material
+		num positions      :  11555
+		num normals        :  11555
+		num tangents       :  0
+		num uvs            :  23110
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  3852
+	processing begun of mesh:  plane
+		animation processing begun
+			processing action planeAction.005:  in[1 - 361], out[0 - 361]
+		processing begun of material:  plane
+		processing begun of material:  blue.001
+		processing begun of material:  red.001
+		processing begun of material:  black.001
 		processing begun of multimaterial:  solar_system.Multimaterial#5
-		num positions      :  3152
-		num normals        :  3152
+		num positions      :  1230
+		num normals        :  1230
 		num tangents       :  0
-		num uvs            :  6304
+		num uvs            :  2460
 		num uvs2           :  0
 		num colors         :  0
-		num triangles      :  1280
-	processing begun of mesh:  left_gun
-		processing begun of material:  white
-		registered as also a user of material:  white
-		num positions      :  2727
-		num normals        :  2727
+		num triangles      :  488
+	processing begun of mesh:  plane1
+		animation processing begun
+			processing action plane1Action.004:  in[1 - 361], out[0 - 361]
+		processing begun of material:  plane
+		processing begun of material:  blue.001
+		processing begun of material:  red.001
+		processing begun of material:  black.001
+		registered as also a user of material:  plane
+		registered as also a user of material:  blue.001
+		registered as also a user of material:  red.001
+		registered as also a user of material:  black.001
+		processing begun of multimaterial:  solar_system.Multimaterial#6
+		num positions      :  1236
+		num normals        :  1236
 		num tangents       :  0
-		num uvs            :  5454
+		num uvs            :  2472
 		num uvs2           :  0
 		num colors         :  0
-		num triangles      :  1056
-	processing begun of mesh:  right_gun
-		processing begun of material:  white
-		registered as also a user of material:  white
-		num positions      :  2727
-		num normals        :  2727
+		num triangles      :  488
+	processing begun of mesh:  plane2
+		animation processing begun
+			processing action plane2Action.002:  in[0 - 361], out[0 - 361]
+		processing begun of material:  plane
+		processing begun of material:  blue.001
+		processing begun of material:  red.001
+		processing begun of material:  black.001
+		registered as also a user of material:  plane
+		registered as also a user of material:  blue.001
+		registered as also a user of material:  red.001
+		registered as also a user of material:  black.001
+		processing begun of multimaterial:  solar_system.Multimaterial#7
+		num positions      :  1228
+		num normals        :  1228
 		num tangents       :  0
-		num uvs            :  5454
+		num uvs            :  2456
 		num uvs2           :  0
 		num colors         :  0
-		num triangles      :  1056
+		num triangles      :  488
+	processing begun of mesh:  trees
+		processing begun of material:  evergreen_leaves
+		processing begun of material:  dirt
+		processing begun of material:  leaves
+		processing begun of material:  dry_leaves
+		registered as also a user of material:  evergreen_leaves
+		registered as also a user of material:  dirt
+		registered as also a user of material:  leaves
+		registered as also a user of material:  dry_leaves
+		processing begun of multimaterial:  solar_system.Multimaterial#8
+		num positions      :  1125
+		num normals        :  1125
+		num tangents       :  0
+		num uvs            :  2250
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  382
+	processing begun of mesh:  iceRock
+		processing begun of material:  ice
+		num positions      :  612
+		num normals        :  612
+		num tangents       :  0
+		num uvs            :  1224
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  204
+	processing begun of mesh:  lightRock
+		processing begun of material:  light_rock
+		num positions      :  526
+		num normals        :  526
+		num tangents       :  0
+		num uvs            :  1052
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  176
+	processing begun of mesh:  darkRock
+		processing begun of material:  black
+		registered as also a user of material:  black
+		num positions      :  492
+		num normals        :  492
+		num tangents       :  0
+		num uvs            :  984
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  164
 ========= Writing of JSON file started =========
 	writing mesh:  earth
-	writing mesh:  plane
-	writing mesh:  clouds
-	writing mesh:  volcano_world
-	writing mesh:  ringed_planet
-	writing mesh:  rings
+	writing mesh:  volcanoWorld
+	writing mesh:  darkWorld
 	writing mesh:  player
-	writing mesh:  left_engine
-	writing mesh:  right_engine
-	writing mesh:  left_gun
-	writing mesh:  right_gun
+	writing mesh:  leftGun
+	writing mesh:  rightGun
+	writing mesh:  a
+	writing mesh:  w
+	writing mesh:  d
+	writing mesh:  polutionWorld
+	writing mesh:  greyClouds
+	writing mesh:  sun
+	writing mesh:  plane
+	writing mesh:  plane1
+	writing mesh:  plane2
+	writing mesh:  trees
+	writing mesh:  iceRock
+	writing mesh:  lightRock
+	writing mesh:  darkRock
 ========= Writing of JSON file completed =========
 ========= end of processing =========
-elapsed time:  0 min, 10.0476 secs
+elapsed time:  0 min, 12.5331 secs

@@ -1,13 +1,13 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, NgZone } from '@angular/core';
 import {
   Scene,
   SceneLoader,
   Vector3,
-  Color4,
   HemisphericLight,
   PointLight,
   Color3,
   UniversalCamera,
+  GlowLayer
 } from '@babylonjs/core';
 import '@babylonjs/core/Debug/debugLayer';
 import '@babylonjs/inspector';
@@ -18,21 +18,30 @@ import { Player } from '@components/player/player';
 import { CameraService } from '@services/camera.service';
 import { InputService } from '@services/input.service';
 import { ParticleService } from '@services/particle.service';
-import { ParticleTrailModel } from '@models/particle-trail.model';
+import { Plane } from '@components/plane/plane';
+import { Router } from '@angular/router';
+import { RoutePath } from '@common/routes';
 
 const EARTH_ROTATE_PERIOD = -120;
 const FOV = 50;
-const CAMERA_DISTANCE = -1.3;
+const CAMERA_DISTANCE = -1.5;
+const CAMERA_HEIGHT = 0.3;
 
-const THRUST_RATE = 0.0001;
+// THRUST
+const DISTANCE_PER_SEC = 0.02;
 const VEL_LAG = 0.07;
-const MAX_Z_VEL = 0.03;
+const MAX_Z_VEL = 0.05;
 
-const TURN_RATE = 0.0001;
+// YAW & ROLL
+const YAW_PER_SEC = 0.01;
+const ROLL_PER_SEC = 2;
 const ROT_LAG = 0.05;
-const MAX_Y_ROT = 0.015;
-const MAX_Z_ROT = 0.001;
+const MAX_Y_ROT = 0.008;
+const MAX_Z_ROT = Utils.degreesToRads(45);
 
+// PITCH
+const PITCH_PER_SEC = 0.01;
+const MAX_X_ROT = 0.008;
 
 @Component({
   selector: 'app-solar-system',
@@ -55,7 +64,9 @@ export class SolarSystemComponent implements OnInit, AfterViewInit {
     private modelService: ModelService,
     private camera: CameraService,
     private input: InputService,
-    private particle: ParticleService
+    private particle: ParticleService,
+    private router: Router,
+    private ngZone: NgZone
   ) {}
 
   public ngOnInit() {
@@ -68,9 +79,10 @@ export class SolarSystemComponent implements OnInit, AfterViewInit {
     this.scene = await this.renderEngine.createScene(this.canvasRef.nativeElement);
     this.renderEngine.addInspector(this.scene);
 
-    await this.loadSceneObjects();
-    this.player = new Player(this.scene, MAX_Z_VEL, MAX_Y_ROT, MAX_Z_ROT, this.input, this.particle, this.modelService);
-    this.playerCam = this.camera.createChaseCam(this.scene, this.player, CAMERA_DISTANCE, FOV);
+    await this.loadScene();
+
+    this.player = new Player(this.scene, MAX_Z_VEL, MAX_Y_ROT, MAX_Z_ROT, MAX_X_ROT, this.input, this.particle, this.modelService);
+    this.playerCam = this.camera.createChaseCam(this.scene, this.player, CAMERA_HEIGHT, CAMERA_DISTANCE, FOV);
     this.input.initInput(this.scene);
 
     this.renderEngine.startEngine(this.scene);
@@ -82,33 +94,41 @@ export class SolarSystemComponent implements OnInit, AfterViewInit {
     }, 1000);
   }
 
-  private async loadSceneObjects() {
-    this.modelService.createSkybox(this.scene, 'assets/textures/skybox/skybox');
+  private async loadScene() {
+    this.modelService.createSkybox(this.scene, 'assets/textures/skybox/space');
     const sceneContainer = await SceneLoader.LoadAssetContainerAsync('assets/models/solar_system/', 'solar_system.babylon', this.scene);
     sceneContainer.addAllToScene();
-    this.createCloudInstances();
-    this.loadPlane();
+    this.createDarkPlanetRing();
     this.createLighting(this.scene);
   }
 
   private updateScene() {
     this.updateInput();
     this.scene.registerBeforeRender(() => {
-      this.updateModels();
       this.camera.updateChaseCam(this.scene, this.player, VEL_LAG, ROT_LAG);
+      this.updateModels();
     });
   }
 
   private updateInput() {
     this.scene.onBeforeRenderObservable.add(() => {
-      this.player.thrust(THRUST_RATE);
-      this.player.turnLeft(TURN_RATE);
-      this.player.turnRight(TURN_RATE);
+      this.player.thrust(DISTANCE_PER_SEC);
+      this.player.turnLeft(YAW_PER_SEC, ROLL_PER_SEC);
+      this.player.turnRight(YAW_PER_SEC, ROLL_PER_SEC);
+      this.player.pitchDown(PITCH_PER_SEC);
+      this.player.pitchUp(PITCH_PER_SEC);
       this.player.toggleTrails();
     });
   }
 
   private updateModels() {
+
+    if (this.player.playerMesh.intersectsMesh(this.scene.getMeshByID('earth'))) {
+        this.ngZone.run(() => {
+          this.router.navigateByUrl(RoutePath.HOME);
+          this.scene.dispose();
+        });
+    }
     // BODY ROTATIONS
     this.modelService.rotateMesh(
       this.scene,
@@ -119,8 +139,22 @@ export class SolarSystemComponent implements OnInit, AfterViewInit {
 
     this.modelService.rotateMesh(
       this.scene,
-      'volcano_world',
+      'volcanoWorld',
       new Vector3(0, 1, 0), EARTH_ROTATE_PERIOD,
+      this.renderEngine.engine.getFps()
+    );
+
+    this.modelService.rotateMesh(
+      this.scene,
+      'polutionWorld',
+      new Vector3(0, 1, 0), EARTH_ROTATE_PERIOD,
+      this.renderEngine.engine.getFps()
+    );
+
+    this.modelService.rotateMesh(
+      this.scene,
+      'sun',
+      new Vector3(0, 1, 0), -30,
       this.renderEngine.engine.getFps()
     );
 
@@ -139,23 +173,27 @@ export class SolarSystemComponent implements OnInit, AfterViewInit {
       this.renderEngine.engine.getFps()
     );
 
-    this.player.animateEngines();
+    this.modelService.rotateTransformNode(
+      this.scene,
+      'coDarkRock',
+      new Vector3(0, 1, 0), 120,
+      this.renderEngine.engine.getFps()
+    );
   }
 
-  private createCloudInstances() {
-    const cloud: any = this.scene.getMeshByID('clouds');
+  private createClouds(mesh: string, parent: string) {
+    const cloud: any = this.scene.getMeshByID(mesh);
     const radius = 0.6;
     cloud.isVisible = false;
 
-    for (let i = 0; i < 20; i++) {
-      const newCloud = cloud.createInstance('cloud' + i);
-      newCloud.setParent(this.scene.getMeshByID('earth'));
-
+    for (let i = 0; i < 25; i++) {
+      const newCloud = cloud.createInstance(mesh + i);
+      newCloud.setParent(this.scene.getMeshByID(parent));
       const theta = Utils.degreesToRads(Utils.random(360));
       const phi = Utils.degreesToRads(Utils.random(180));
       newCloud.position = Utils.pointOnSphere(radius, phi, theta);
 
-      const scale = Utils.randomInRange(0.4, 0.6);
+      const scale = Utils.randomInRange(0.08, 0.1);
       newCloud.scaling = new Vector3(scale, scale, scale);
 
       newCloud.rotation = new Vector3(0, -theta, -phi);
@@ -163,71 +201,42 @@ export class SolarSystemComponent implements OnInit, AfterViewInit {
   }
 
   private loadPlane() {
-    const plane: any = this.scene.getMeshByID('plane');
-    const coPlane = this.modelService.createTransformNode(this.scene, 'plane', 'earth');
-    coPlane.position = new Vector3(0, 0, 0);
-    coPlane.rotation = new Vector3(0, 0, 0);
-    plane.rotation = new Vector3(0, 0, 0);
-    plane.setParent(coPlane);
+    const planes = new Plane(this.scene, 'plane', 'polutionWorld', this.particle, this.modelService);
+  }
 
-    const lEngine = this.particle.createParticleTrail(this.scene, new ParticleTrailModel({
-      name: 'lEng',
-      minEmitBox: new Vector3(0.02, -0.01, 0.002),
-      maxEmitBox: new Vector3(0.03, -0.015, 0.003),
-      pTextureUrl: 'assets/textures/plane_trail/plane_trail.jpg',
-      direction1: new Vector3(0, Utils.degreesToRads(0), 0),
-      direction2: new Vector3(0, Utils.degreesToRads(0), 0),
-      color1: new Color4(1, 1, 1, 1.0),
-      color2: new Color4(0.5, 0.5, 0.5, 1.0),
-      colorDead: new Color4(0, 0, 0, 0.0),
-      emitRate: 600,
-      minLifeTime: 0.2,
-      maxLifeTime: 0.4,
-      minSize: 0.01,
-      maxSize: 0.02,
-      minEmitPower: 1,
-      maxEmitPower: 3,
-      updateSpeed: 0.001,
-      emitter: plane,
-      gpuCap: 2000,
-      cpuCap: 2000
-    }));
-    lEngine.start();
+  private createDarkPlanetRing() {
+    const rock: any = this.scene.getMeshByID('darkRock');
+    rock.isVisible = false;
+    this.modelService.createTransformNode(this.scene, 'darkRock', 'darkWorld');
+    const coDarkRock = this.scene.getTransformNodeByID('coDarkRock');
+    coDarkRock.rotation = new Vector3(0, 0, 0);
+    for (let i = 0; i < 200; i++) {
+      const newRock = rock.createInstance('darkRock' + i);
+      newRock.setParent(coDarkRock);
+      const radius = Utils.randomInRange(6, 10);
+      const theta = Utils.degreesToRads(Utils.random(360));
+      const phi = Utils.degreesToRads(Utils.randomInRange(83, 97));
+      newRock.position = Utils.pointOnSphere(radius, phi, theta);
 
-    const rEngine = this.particle.createParticleTrail(this.scene, new ParticleTrailModel({
-      name: 'rEng',
-      minEmitBox: new Vector3(0.02, 0.01, 0.002),
-      maxEmitBox: new Vector3(0.03, 0.015, 0.003),
-      pTextureUrl: 'assets/textures/plane_trail/plane_trail.jpg',
-      direction1: new Vector3(0, Utils.degreesToRads(0), 0),
-      direction2: new Vector3(0, Utils.degreesToRads(0), 0),
-      color1: new Color4(1, 1, 1, 1.0),
-      color2: new Color4(0.5, 0.5, 0.5, 1.0),
-      colorDead: new Color4(0, 0, 0, 0.0),
-      emitRate: 600,
-      minLifeTime: 0.2,
-      maxLifeTime: 0.4,
-      minSize: 0.01,
-      maxSize: 0.02,
-      minEmitPower: 1,
-      maxEmitPower: 3,
-      updateSpeed: 0.001,
-      emitter: plane,
-      gpuCap: 2000,
-      cpuCap: 2000
-    }));
-    rEngine.start();
+      const scale = Utils.randomInRange(0.1, 0.3);
+      newRock.scaling = new Vector3(scale, scale, scale);
+
+      newRock.rotation = new Vector3(0, -theta, -phi);
+    }
   }
 
   private createLighting(scene: Scene) {
     const ambient = new HemisphericLight('ambientLight', new Vector3(0, 0, 0), scene);
-    ambient.intensity = 0.6;
+    ambient.intensity = 0.3;
 
     const sun = new PointLight('sunLight', new Vector3(0, 0, 0), scene);
-    sun.intensity = 50000;
+    sun.intensity = 30000;
     sun.diffuse = new Color3(1, 1, 1);
-    sun.specular = new Color3(1, 0, 0);
     sun.parent = this.scene.getMeshByID('sun');
-    sun.position = new Vector3(125, 0, 8);
+    sun.position = new Vector3(0, 0, 0);
+    sun.excludedMeshes.push(this.scene.getMeshByID('sun'));
+
+    const gl = new GlowLayer('glow', this.scene);
+    gl.intensity = 1;
   }
 }

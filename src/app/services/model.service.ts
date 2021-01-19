@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Scene, AbstractMesh, SceneLoader, MeshBuilder, StandardMaterial, CubeTexture, Texture, TransformNode, Vector3 } from '@babylonjs/core';
+import { Scene, AbstractMesh, SceneLoader, MeshBuilder, StandardMaterial, CubeTexture, Texture, TransformNode, Vector3, Axis, Space } from '@babylonjs/core';
 import Utils from '@common/utils';
 
 @Injectable({

@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng serve -o --port=4202",
-    "build": "node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng build --base-href /dist/waynepovey-portfolio/",
+    "build": "node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -21,8 +21,11 @@
     "@angular/router": "~10.0.14",
     "@babylonjs/core": "^4.1.0",
     "@babylonjs/gui": "^4.1.0",
-    "@babylonjs/materials": "^4.1.0",
     "@babylonjs/inspector": "^4.1.0",
+    "@babylonjs/materials": "^4.1.0",
+    "bootstrap": "^4.5.2",
+    "ngx-bootstrap": "^6.1.0",
+    "pepjs": "^0.5.2",
     "rxjs": "~6.6.2",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"

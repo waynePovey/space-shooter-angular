@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
-import { RoutePath } from './common/routes';
+import { HomeComponent } from '@components/home/home.component';
+import { RoutePath } from '@common/routes';
 import { SolarSystemComponent } from '@scenes/solar-system/solar-system.component';
 
 
